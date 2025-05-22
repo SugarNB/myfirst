@@ -1,0 +1,6 @@
+【技术选型】推荐黄金组合：
+
+后端：Flask（轻量灵活）
+前端：Bootstrap5（响应式布局）
+数据库：SQLite（无需额外安装）
+ORM：SQLAlchemy（像操作Python对象一样操作数据库）

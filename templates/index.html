@@ -1,37 +1,68 @@
 <!DOCTYPE html>
+<!-- 声明文档类型为HTML5 -->
 <html lang="zh-CN">
+<!-- 设置页面语言为简体中文 -->
+
 <head>
+    <!-- 头部区域，包含页面的元信息 -->
     <meta charset="UTF-8">
+    <!-- 设置字符编码为UTF-8，支持中文显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 响应式设计，让页面在移动设备上也能正常显示 -->
     <title>苏哥的工作站</title>
+    <!-- 页面标题，显示在浏览器标签上 -->
+    
+    <!-- 引入Bootstrap CSS样式库 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
+    <!-- 页面主体，设置浅灰色背景 -->
+    
     <div class="container py-5">
+        <!-- 主容器，添加上下内边距(padding) -->
+        
         <!-- 标题区（像店铺招牌） -->
         <header class="text-center mb-5 p-4 bg-white rounded shadow">
+            <!-- 标题区域，居中显示，白色背景，圆角，阴影效果 -->
             <h1 class="display-4 text-primary">欢迎来到苏哥的工作站！</h1>
+            <!-- 大标题，使用Bootstrap的display-4样式，蓝色文字 -->
         </header>
 
         <!-- 添加表单（像收银台） -->
         <div class="card mb-4">
+            <!-- 卡片组件，底部外边距 -->
             <div class="card-body">
+                <!-- 卡片内容区 -->
                 <form method="POST" class="row g-3">
+                    <!-- 表单，使用POST方法提交，设置行间距 -->
+                    
                     <div class="col-md-4">
+                        <!-- 第一列，占4格宽度 -->
                         <input type="text" name="name" class="form-control" placeholder="名称" required>
+                        <!-- 文本输入框，用于输入书签名称，必填 -->
                     </div>
                     <div class="col-md-4">
+                        <!-- 第二列，占4格宽度 -->
                         <input type="url" name="url" class="form-control" placeholder="https://..." required>
+                        <!-- URL输入框，用于输入网址，会自动验证URL格式，必填 -->
                     </div>
                     <div class="col-md-2">
+                        <!-- 第三列，占2格宽度 -->
                         <select name="category" class="form-select">
+                            <!-- 下拉选择框，用于选择分类 -->
                             <option value="工具">工具</option>
+                            <!-- 选项1：工具 -->
                             <option value="学习">学习</option>
+                            <!-- 选项2：学习 -->
                             <option value="娱乐">娱乐</option>
+                            <!-- 选项3：娱乐 -->
                         </select>
                     </div>
                     <div class="col-md-2">
+                        <!-- 第四列，占2格宽度 -->
                         <button type="submit" class="btn btn-primary w-100">添加</button>
+                        <!-- 提交按钮，蓝色，宽度100% -->
                     </div>
                 </form>
             </div>
@@ -39,20 +70,35 @@
 
         <!-- 网址展示区（像货架陈列） -->
         <div class="row">
+            <!-- 行布局 -->
+            
+            <!-- 使用Jinja2模板语法循环显示三个分类 -->
             {% for category in ['工具', '学习', '娱乐'] %}
             <div class="col-md-4 mb-4">
+                <!-- 每个分类占4格宽度，底部外边距 -->
                 <div class="card h-100">
+                    <!-- 卡片，高度100% -->
                     <div class="card-header bg-info text-white">
+                        <!-- 卡片头部，浅蓝色背景，白色文字 -->
                         {{ category }}
+                        <!-- 显示分类名称 -->
                     </div>
                     <div class="card-body">
+                        <!-- 卡片主体 -->
                         <ul class="list-group list-group-flush">
+                            <!-- 无边框列表组 -->
+                            
+                            <!-- 循环显示该分类下的所有书签 -->
                             {% for item in bookmarks if item.category == category %}
                             <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <!-- 列表项，弹性布局，内容两端对齐，垂直居中 -->
                                 <a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+                                <!-- 书签链接，新标签页打开 -->
                                 <a href="{{ url_for('delete', id=item.id) }}" class="btn btn-sm btn-danger">×</a>
+                                <!-- 删除按钮，红色，小尺寸 -->
                             </li>
                             {% else %}
+                            <!-- 如果没有该分类的书签，显示提示 -->
                             <li class="list-group-item text-muted">暂无内容</li>
                             {% endfor %}
                         </ul>
@@ -63,6 +109,7 @@
         </div>
     </div>
 
+    <!-- 引入Bootstrap的JavaScript库（包含Popper.js） -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

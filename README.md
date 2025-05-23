@@ -22,14 +22,15 @@
    - 直观的分类展示
 
 ## 文件结构
-```
+
+<pre>
 project/
 ├── app.py                # Flask主应用文件
 ├── templates/
 │   └── index.html        # 前端模板文件
 └── instance/
     └── workstation.db    # SQLite数据库文件
-```
+</pre>
 
 ## 快速开始
 
